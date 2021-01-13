@@ -1,6 +1,6 @@
 # Advent of code 2020, problem 1
 
-problem_data = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/input_problem1.txt')[[1]]
+problem_data = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/day1/input_problem1.txt')[[1]]
 
 # I'm guessing there's no way to know which pair 
 # is more likely to add to 2020.

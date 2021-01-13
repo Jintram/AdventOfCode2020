@@ -14,7 +14,7 @@ for (idx1 in 1:(length(problem_data)-2)) {
         
         partial_sum = (problem_data[[idx1]]+problem_data[[idx2]])
         
-        if (partial_sum < 2020) {
+        if (partial_sum < 2020) { # assuming all numbers >0
             
             for (idx3 in (2+idx1):length(problem_data)) {
                 
