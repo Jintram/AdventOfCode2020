@@ -4,7 +4,9 @@
 problem_data = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/day1/input_problem1.txt')[[1]]
 
 # In case we want to check all combination per se, 
-# this is more optimal and concise:
+# (e.g. because there might be multiple valid
+# combinations)
+# this is more optimal and concise probably:
 
 # (Part A) For the sets of two
 all_combinations = combn(problem_data, 2)
