@@ -117,13 +117,14 @@ sum(can_hold)
 ################################################################################
 # Part B
 
-# This just requires slight modifications
+# This just requires some modifications to calculating tree
 
 # Same function as above, but now also tracking the duplicity of each branch
-calculate_tree_and_duplicity_for_bag = function(start_bag) {
+calculate_tree_and_bag_count = function(start_bag) {
     
     # Where we'll collect final output
     finished_tree = list()
+    bag_count = -1 # -1 to not count the starting bag
     finished_duplicity_tree = list()
     
     # These will hold branches that are still growing
@@ -134,6 +135,14 @@ calculate_tree_and_duplicity_for_bag = function(start_bag) {
     while(length(the_tree) > 0) {
         
         overflow_counter=overflow_counter+1
+        
+        # Keep track of total amount of bags that are added to the tree
+        bag_count = bag_count + sum(sapply(duplicity_tree, prod, na.rm=T))
+        
+        # debugging
+        #bag_count = c(bag_count, sum(sapply(duplicity_tree, prod, na.rm=T)))
+        #print(paste0('-------- level ', overflow_counter, '-----------'))
+        #print(duplicity_tree)
         
         new_tree=list()
         new_duplicity_tree=list()
@@ -164,33 +173,24 @@ calculate_tree_and_duplicity_for_bag = function(start_bag) {
         }
         the_tree = new_tree
         duplicity_tree = new_duplicity_tree
-    
+        
         if (overflow_counter > 1000) {
            stop('Reached max nr of levels, aborted to prevent infinite loop.') 
         }
         
     }
     
-    return(list(tree=finished_tree, duplicity=finished_duplicity_tree))
+    return(list(tree=finished_tree, bag_count=bag_count))
     
 }
 
+# Now calculate which bags go into the shiny gold bag,
+# using the fn that also calculates total amount of bags in
+# the tree
+sg_tree = calculate_tree_and_bag_count('shiny gold')
 
-# NEED TO FIND A SOLUTION HERE TO NOT JUST COUNT THE BAGS AT THE END OF THE BRANCH!!
-# This probably requires some modification in how I track the branches..
-
-my_tree_and_duplicity = calculate_tree_and_duplicity_for_bag('shiny gold')
-
-# Now calculate the amount of bags that are in a shiny gold bag:
-final_nr_of_bags = lapply(1:length(my_tree_and_duplicity$duplicity), 
-    
-    prod, na.rm=T)
-
-print(paste0('Final nr of bags required: ',final_nr_of_bags))
-
-
-
-
+# Print for user
+print(paste0('Number of bags in shiny gold bag: ', sg_tree$bag_count))
 
 
 
