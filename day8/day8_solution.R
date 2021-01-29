@@ -21,7 +21,7 @@ get_path = function(jumps, return_what = 'locations') {
     visited = rep(FALSE, length(jumps)) # Create tracking of already visited
     
     # go over the locations
-    while (!visited[current_location] & current_location < nr_instructions & counter <= 1e6) {
+    while (!visited[current_location] & current_location < nr_instructions & counter < 1e6) {
         
         counter=counter+1 
         
