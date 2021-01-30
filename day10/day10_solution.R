@@ -27,47 +27,6 @@ frequency_table = table(differences)
 print(paste0('The final answer is: ', prod(frequency_table)))
 
 ################################################################################
-# Part B
-
-# Now we need to find all possible chains
-# 
-# Perhaps easiest to simply expand the range of possibilities by
-# taking out possiblilities one at a time
-
-# initial allowed chain
-allowed_chains = list(day10_input_ordered)
-latest_chains = allowed_chains
-
-while(any(allowed_out)) {
-    
-    # MAKE A FOR LOOP HERE OVER LATEST CHAINS
-    
-    # stats on current chain
-    current_chain = latest_chains[[idx]]
-    differences = current_chain[2:length(current_chain)]-current_chain[1:(length(current_chain)-1)]
-    
-    # let's identify what can be taken out
-    # these are new differences for element i if element i would be taken out
-    differences_new = c(Inf,differences[1:(length(differences)-1)]+differences[2:(length(differences))],Inf)
-    allowed_out = which(differences_new<=3)
-    
-    latest_chains = lapply(allowed_out, function(X) {current_chain[-X]})
-    allowed_chains = c(allowed_chains, latest_chains)
-    
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    # So it's not so super straightforward, because we'll easily create redundant lists..
-    # it's probably better to just 
-    # a) decide which adapters can connect to which higher ones
-    # b) start building the tree using those rules
-    # Perhaps this can even be done with Noreen's matrix approach
-    # also applied in the previous tree-building challenge..
-    # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    
-}
-
-# 
-
-################################################################################
 # PART B
 # Solution inspired by Noreen's solution to a previous problem
 # (The other one with creating trees)
