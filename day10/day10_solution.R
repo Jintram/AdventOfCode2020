@@ -3,13 +3,14 @@
 # Advent of code 2012, day 10, part A
 
 day10_input = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/day10/day10_input.txt')$V1
+#day10_input = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/day10/day10_example1_input.txt')$V1
 #day10_input = read.table('/Users/m.wehrens/Documents/git_repos/AdventOfCode2020/day10/day10_example2_input.txt')$V1
 day10_input = c(0, day10_input, max(day10_input)+3) # add the outlet and your built-in adapter 
 
 # the device has a built-in adapter w/ 3 j higher output than the highest adapter available from the input list
 
 # the final question for A is what are the differences if we chain all
-# so now the furst question is: can we make a chain that connects all?
+# so now the first question is: can we make a chain that connects all?
 
 # seems we need to connect them in ascending order
 day10_input_ordered = day10_input[order(day10_input, decreasing = F)]
@@ -24,7 +25,8 @@ if (!all(differences<=3)) {
 frequency_table = table(differences)
 
 # Final answer:
-print(paste0('The final answer is: ', prod(frequency_table)))
+final_answer = frequency_table[names(frequency_table)==1] * frequency_table[names(frequency_table)==3]
+print(paste0('The final answer is: ', final_answer))
 
 ################################################################################
 # PART B
